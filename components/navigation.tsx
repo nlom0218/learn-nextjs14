@@ -14,10 +14,7 @@ export default function Navigation() {
           <Link href="/">Home</Link>
         </li>
         <li>
-          <Link href="/about-us">About us</Link>
-        </li>
-        <li>
-          <button onClick={() => setNum((prev) => prev + 1)}>{num}</button>
+          <Link href="/movies">Movies</Link>
         </li>
       </ul>
     </nav>
