@@ -1,16 +1,23 @@
 import { Suspense } from 'react';
-import MovieInfo from '../../../../components/movies/movie-info';
+import MovieInfo, { getMovie } from '../../../../components/movies/movie-info';
 import MovieVideos from '../../../../components/movies/movie-videos';
+import { title } from 'process';
 
-export const metadata = {
-  title: 'Movie detail',
+type Props = {
+  params: {
+    id: string;
+  };
 };
 
-export default function MovieDetail({
-  params: { id },
-}: {
-  params: { id: string };
-}) {
+export async function generateMetadata({ params: { id } }: Props) {
+  const movie = await getMovie(id);
+
+  return {
+    title: movie.title,
+  };
+}
+
+export default function MovieDetail({ params: { id } }: Props) {
   return (
     <div>
       <Suspense fallback={<div>info 로딩 중...</div>}>

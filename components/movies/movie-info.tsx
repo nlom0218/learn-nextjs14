@@ -1,7 +1,7 @@
 import { API_URL } from '../../app/(movies)/movies/page';
+import styles from '../../styles/movie-info.module.css';
 
-async function getMovie(id: string) {
-  await new Promise((res) => setTimeout(res, 2000));
+export async function getMovie(id: string) {
   return await fetch(`${API_URL}/${id}`).then((res) => res.json());
 }
 
@@ -9,9 +9,16 @@ export default async function MovieInfo({ id }: { id: string }) {
   const movie = await getMovie(id);
 
   return (
-    <div>
-      <div>{movie.title}</div>
-      <span>{movie.overview}</span>
+    <div className={styles.container}>
+      <img src={movie.poster_path} className={styles.poster} />
+      <div className={styles.info}>
+        <h1 className={styles.title}>{movie.title}</h1>
+        <h3>★{movie.vote_average.toFixed(1)}</h3>
+        <p>{movie.overview}</p>
+        <a href={movie.homepage} target="_blank">
+          HomePage
+        </a>
+      </div>
     </div>
   );
 }
